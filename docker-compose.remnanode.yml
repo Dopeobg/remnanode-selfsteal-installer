@@ -1,0 +1,24 @@
+# Reference Docker Compose template for RemnaNode
+# Location on target node: /opt/remnanode/docker-compose.yml
+services:
+  remnanode:
+    container_name: remnanode
+    hostname: remnanode
+    image: remnawave/node:latest
+    network_mode: host
+    restart: always
+
+    cap_add:
+      - NET_ADMIN
+
+    volumes:
+      - /dev/shm:/dev/shm
+
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+
+    environment:
+      - NODE_PORT=2222
+      - SECRET_KEY="YOUR_REMNANODE_SECRET_KEY_HERE"
